@@ -47,6 +47,14 @@ This visualization shows the distribution of policyholders based on the number o
 A heatmap was used to analyze the correlation between different numerical features in the dataset. This helps in understanding the relationships between variables like age, BMI, and charges.
 
 ![Correlation Heatmap](images/map.png)
+![Number of people in each region](images/region_count.png) 
+![Distribution of Insurance Cost vs Region](images/boxplot.png) 
+![Number of children per person](images/children.png) 
+![Insurance Cost by age and smoking stats](images/claim_amount.png) 
+
+ 
+
+ 
 
 ---
 
