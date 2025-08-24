@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        .prediction-result {
+            background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .prediction-amount {
+            font-size: 3em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .input-summary {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .summary-item {
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .summary-label {
+            font-weight: bold;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .summary-value {
+            font-size: 18px;
+            color: #333;
+            margin-top: 5px;
+        }
+        
+        .nav-buttons {
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 10px;
+            border: none;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .disclaimer {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            color: #856404;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 Prediction Result</h1>
+        
+        <div class="prediction-result">
+            <h2>Estimated Insurance Charges</h2>
+            <div class="prediction-amount">${{ "%.2f"|format(prediction) }}</div>
+            <p>Based on the provided information</p>
+        </div>
+        
+        <div class="input-summary">
+            <h3 style="margin-bottom: 15px; color: #333;">Input Summary:</h3>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-label">Age</div>
+                    <div class="summary-value">{{ age }} years</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Sex</div>
+                    <div class="summary-value">{{ sex.title() }}</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">BMI</div>
+                    <div class="summary-value">{{ bmi }}</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Children</div>
+                    <div class="summary-value">{{ children }}</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Smoker</div>
+                    <div class="summary-value">{{ smoker.title() }}</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-label">Region</div>
+                    <div class="summary-value">{{ region.title() }}</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="nav-buttons">
+            <a href="/" class="btn btn-primary">🏠 Make Another Prediction</a>
+            <a href="/analytics" class="btn btn-secondary">📊 View Analytics</a>
+        </div>
+        
+        <div class="disclaimer">
+            <strong>Disclaimer:</strong> This prediction is based on machine learning models and should be used for informational purposes only. Actual insurance charges may vary based on additional factors not included in this model.
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Insurance Prediction</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+        
+        .nav {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .nav a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 15px;
+            padding: 10px 20px;
+            border: 2px solid #667eea;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+        
+        .nav a:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .stat-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .form-container {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        input, select {
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            margin: 20px auto;
+            display: block;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🏥 Health Insurance Prediction System</h1>
+        
+        <div class="nav">
+            <a href="/">Home</a>
+            <a href="/analytics">Analytics Dashboard</a>
+        </div>
+        
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-title">Total Policyholders</div>
+                <div style="font-size: 24px; color: #667eea;">{{ stats.total_policyholders }}</div>
+            </div>
+            
+            <div class="stat-card">
+                <div class="stat-title">Regions Covered</div>
+                <div style="font-size: 24px; color: #667eea;">{{ stats.region_avg|length }}</div>
+            </div>
+        </div>
+        
+        <div class="form-container">
+            <h2 style="text-align: center; margin-bottom: 20px; color: #333;">Predict Insurance Charges</h2>
+            
+            <form action="/predict" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="age">Age:</label>
+                        <input type="number" id="age" name="age" min="18" max="100" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="sex">Sex:</label>
+                        <select id="sex" name="sex" required>
+                            <option value="">Select...</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bmi">BMI:</label>
+                        <input type="number" id="bmi" name="bmi" step="0.1" min="10" max="50" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="children">Number of Children:</label>
+                        <select id="children" name="children" required>
+                            <option value="">Select...</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5+</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="smoker">Smoker:</label>
+                        <select id="smoker" name="smoker" required>
+                            <option value="">Select...</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="region">Region:</label>
+                        <select id="region" name="region" required>
+                            <option value="">Select...</option>
+                            <option value="southwest">Southwest</option>
+                            <option value="southeast">Southeast</option>
+                            <option value="northwest">Northwest</option>
+                            <option value="northeast">Northeast</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <button type="submit" class="submit-btn">💰 Predict Insurance Charges</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
