@@ -1,5 +1,5 @@
 # Health Insurance Cost Prediction & Analysis 🩺
-
+[➡️ View the Full Analysis Notebook](Health Insurance.ipynb)
 ## Project Overview
 
 This project provides a comprehensive analysis of a health insurance dataset. The primary goal is to identify the key factors that influence medical insurance charges and to build a predictive model that can estimate costs for new policyholders.
